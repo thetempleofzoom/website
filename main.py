@@ -12,10 +12,17 @@ numrowsdata = df.shape[0]
 multiplier = int(numrowsdata/numcols)
 cols = sl.columns(numcols)
 
-for num in range(numcols):
-    with cols[num]:
-        for index, row in df[num*multiplier:(num+1)*multiplier].iterrows():
-            sl.subheader(row['first name']+" "+row['last name'])
-            sl.write(row['role'])
-            sl.image("images/"+row['image'])
-            sl.markdown("#")
+# for num in range(numcols):
+#     with cols[num]:
+#         for index, row in df[num*multiplier:(num+1)*multiplier].iterrows():
+#             sl.subheader(row['first name']+" "+row['last name'])
+#             sl.write(row['role'])
+#             sl.image("images/"+row['image'])
+#             sl.markdown("#")
+
+for index, row in df.iterrows():
+    with cols[index%numcols]:
+        sl.subheader(row['first name']+" "+row['last name'])
+        sl.write(row['role'])
+        sl.image("images/"+row['image'])
+        sl.markdown("#")
